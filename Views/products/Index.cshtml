@@ -84,77 +84,73 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 new { page, currentFilter = ViewBag.CurrentFilter }))
 
 
-
-<!--Modal Section-->
-<!-- Edit Modal -->
-<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+<!--Delete Modal-->
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDelete" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editTitle"></h5>
+                <h5 class="modal-title" id="detailsTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12" style="width: 72% !important;">
-                            <div class="form-horizontal ">
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">Name</label><br />
-                                    <div class="col-md-10">
-                                        <input placeholder="Product Name" type="text" class="form-control" id="edit_product_name" />
-                                        <br />
-                                        <span id="nameRequired" hidden class="text-danger">Product Name Field is Required !!!!! </span>
-                                    </div>
-                                </div>
+                <h2>Confirm Delete </h2>
+                <h3> Are you sure you want to Delete this ?</h3>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Name
+                        </dt>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">Brand</label><br />
-                                    <div class="col-md-10">
-                                        <select class="form-control" id="edit_brand_id"></select>
-                                    </div>
-                                </div>
+                        <dd>
+                            <span id="deleteName"></span>
+                        </dd>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">Category</label><br />
-                                    <div class="col-md-10">
-                                        <select class="form-control" id="edit_category_id"></select>
-                                    </div>
-                                </div>
+                        <dt>
+                            Year
+                        </dt>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">Year</label><br />
-                                    <div class="col-md-10">
-                                        <input placeholder="2022" type="text" class="form-control" id="edit_model_year" />
-                                        <br />
-                                        <span id="yearRequired" hidden class="text-danger">Model Year Field is Required !!!!! </span>
-                                        <span id="yearInvalid" hidden class="text-danger">Model Year is Invalid !!!!! </span>
-                                    </div>
-                                </div>
+                        <dd>
+                            <span id="deleteYear"></span>
+                        </dd>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">List Price</label><br />
-                                    <div class="col-md-10">
-                                        <input placeholder="2500" type="text" class="form-control" id="edit_list_price" /><br />
-                                        <span id="priceRequired" hidden class="text-danger">Price Field is Required !!!!! </span>
-                                        <span id="priceInvalid" hidden class="text-danger">Price is Invalid !!!!! </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <dt>
+                            Price
+                        </dt>
+
+                        <dd>
+                            <span id="deletePrice"></span>
+                        </dd>
+
+                        <dt>
+                            Brand
+                        </dt>
+
+                        <dd>
+                            <span id="deleteBrand"></span>
+                        </dd>
+
+                        <dt>
+                            Category
+                        </dt>
+
+                        <dd>
+                            <span id="deleteCategory"></span>
+                        </dd>
+
+                    </dl>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="postProductEdit()">Save changes</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
             </div>
         </div>
     </div>
 </div>
-
+<!--Modal Section-->
 <!-- Details Modal -->
 <div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="modalDetailsLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -227,68 +223,71 @@ new { page, currentFilter = ViewBag.CurrentFilter }))
     </div>
 </div>
 
-<!--Delete Modal-->
-<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDelete" aria-hidden="true">
+
+<!-- Edit Modal -->
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="detailsTitle"></h5>
+                <h5 class="modal-title" id="editTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h2>Confirm Delete </h2>
-                <h3> Are you sure you want to Delete this ?</h3>
-                <div>
-                    <hr />
-                    <dl class="dl-horizontal">
-                        <dt>
-                            Name
-                        </dt>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12" style="width: 72% !important;">
+                            <div class="form-horizontal ">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Name</label><br />
+                                    <div class="col-md-10">
+                                        <input placeholder="Product Name" type="text" class="form-control" id="edit_product_name" />
+                                        <br />
+                                        <span id="nameRequired" hidden class="text-danger">Product Name Field is Required !!!!! </span>
+                                    </div>
+                                </div>
 
-                        <dd>
-                            <span id="deleteName"></span>
-                        </dd>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Brand</label><br />
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="edit_brand_id"></select>
+                                    </div>
+                                </div>
 
-                        <dt>
-                            Year
-                        </dt>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Category</label><br />
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="edit_category_id"></select>
+                                    </div>
+                                </div>
 
-                        <dd>
-                            <span id="deleteYear"></span>
-                        </dd>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Year</label><br />
+                                    <div class="col-md-10">
+                                        <input placeholder="2022" type="text" class="form-control" id="edit_model_year" />
+                                        <br />
+                                        <span id="yearRequired" hidden class="text-danger">Model Year Field is Required !!!!! </span>
+                                        <span id="yearInvalid" hidden class="text-danger">Model Year is Invalid !!!!! </span>
+                                    </div>
+                                </div>
 
-                        <dt>
-                            Price
-                        </dt>
-
-                        <dd>
-                            <span id="deletePrice"></span>
-                        </dd>
-
-                        <dt>
-                            Brand
-                        </dt>
-
-                        <dd>
-                            <span id="deleteBrand"></span>
-                        </dd>
-
-                        <dt>
-                            Category
-                        </dt>
-
-                        <dd>
-                            <span id="deleteCategory"></span>
-                        </dd>
-
-                    </dl>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">List Price</label><br />
+                                    <div class="col-md-10">
+                                        <input placeholder="2500" type="text" class="form-control" id="edit_list_price" /><br />
+                                        <span id="priceRequired" hidden class="text-danger">Price Field is Required !!!!! </span>
+                                        <span id="priceInvalid" hidden class="text-danger">Price is Invalid !!!!! </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+                <button type="button" class="btn btn-primary" onclick="postProductEdit()">Save changes</button>
             </div>
         </div>
     </div>
@@ -301,8 +300,7 @@ new { page, currentFilter = ViewBag.CurrentFilter }))
 
         //-------------EDIT--------------------\\
         var EditingProduct = 0;
-        function getProductEdit(productId)
-        {
+        function getProductEdit(productId) {
             EditingProduct = 0;
             EditingProduct = productId;
             //Ajax Fetch data
@@ -345,17 +343,16 @@ new { page, currentFilter = ViewBag.CurrentFilter }))
                 }
             });
         };
-        function postProductEdit()
-        {
+        function postProductEdit() {
 
             //Define Model
             product = new class {
                 product_id = EditingProduct; product_name = $('#edit_product_name').val(); brand_id = parseInt($('#edit_brand_id').val());
-                category_id = parseInt($("#edit_category_id").val()); model_year = $('#edit_model_year').val(); list_price = 0 };
+                category_id = parseInt($("#edit_category_id").val()); model_year = $('#edit_model_year').val(); list_price = 0
+            };
 
             //Check the name field is not empty
-            if (product.product_name == "")
-            {
+            if (product.product_name == "") {
                 $("#nameRequired").attr("hidden", false);
                 return;
             }
@@ -386,8 +383,7 @@ new { page, currentFilter = ViewBag.CurrentFilter }))
 
 
             //check the list price is not empty
-            if ($('#edit_list_price').val() != "")
-            {
+            if ($('#edit_list_price').val() != "") {
                 $("#priceRequired").attr("hidden", true);
                 //check if it is a number
                 if (isNaN($('#edit_list_price').val()) == true) {
@@ -395,8 +391,7 @@ new { page, currentFilter = ViewBag.CurrentFilter }))
                     return;
                 }
             }
-            else
-            {
+            else {
                 $("#priceInvalid").attr("hidden", true);
                 $("#priceRequired").attr("hidden", false);
                 return;
@@ -417,8 +412,7 @@ new { page, currentFilter = ViewBag.CurrentFilter }))
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ "product": product }),
-                success: function (data)
-                {
+                success: function (data) {
                     if (data.status == "200 OK") {
                         alert("Success");
                         location.reload();
@@ -462,15 +456,13 @@ new { page, currentFilter = ViewBag.CurrentFilter }))
                     //Assign Table Data
                     $('#tblSimpleAttribute tbody').empty();
                     var rows = ''
-                    $.each(data.product.storeQuantities, function (i, item)
-                    {
+                    $.each(data.product.storeQuantities, function (i, item) {
                         let showQuantity = item.quantity;
                         let Quantity = "";
                         if (showQuantity == "0") {
                             Quantity = "<span class='text-danger'> Out of Stock </span>"
                         }
-                        else
-                        {
+                        else {
                             Quantity = item.quantity
                         }
                         var line = "<tr>" + "<td>" + item.store_name + "</td>" + "<td>" + item.quantity + "</td>" + "</tr > ";
@@ -547,7 +539,7 @@ new { page, currentFilter = ViewBag.CurrentFilter }))
                 }
             });
         }
-        //-----------------------------------------\\
+                //-----------------------------------------\\
 
     </script>
 }

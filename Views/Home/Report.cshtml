@@ -3,31 +3,46 @@
 <html>
 
 <body>
+    <!-- int[] Chartdata = new int[] this is how i would have done the graph
+            {
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 1).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 2).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 3).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 4).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 5).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 6).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 7).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 8).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 9).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 10).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 11).ToList().Sum(x => x.quantity),
+                db.order_items.Where(x => x.product.category_id == 6 && x.order.order_date.Month == 12).ToList().Sum(x => x.quantity),
+            };-->
 
     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
     <script>
-var xValues = ["Jan", "Feb", "Mar", "April", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-        var yValues = [163,152,200,211,139,127,122,148,160,125,118,90];
+        var xValues = ["Jan", "Feb", "Mar", "April", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+        var yValues = [163, 152, 200, 211, 139, 127, 122, 148, 160, 125, 118, 90];
         var barColors = ["red", "green", "blue", "orange", "brown", "yellow", "purple", "pink", "gray", "Maroon", "Teal", "Lime"];
 
-new Chart("myChart", {
-  type: "bar",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-        data: yValues
-    }]
-  },
-  options: {
-    legend: {display: false},
-    title: {
-      display: true,
-      text: "number of bikes sold over the years "
-    }
-  }
-});
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "number of bikes sold over the years "
+                }
+            }
+        });
     </script>
 
 </body>
